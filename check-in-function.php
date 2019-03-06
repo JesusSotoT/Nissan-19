@@ -4,26 +4,6 @@ include 'conexion.php';
 if(isset($_POST['registro'])){
 
 
-//FOTOGRAFIA/////////////////////////////////////////////////////////////
-
-//capturamos los datos del fichero subido    
-$type=$_FILES['img_2']['type'];
-$tmp_name = $_FILES['img_2']["tmp_name"];
-$name = $_FILES['img_2']["name"];
-$ext= end($array);
-
-
-//Creamos una nueva ruta (nuevo path)
-//Así guardaremos nuestra imagen en la carpeta "images"
-$nuevo_path="fotos-participantes/".$name;
-//Movemos el archivo desde su ubicación temporal hacia la nueva ruta
-
-move_uploaded_file($tmp_name,$nuevo_path);
-//Extraer la extensión del archivo. P.e: jpg
-
-$array=explode('.',$nuevo_path);
-
-$ext= end($array);
 
 
 
@@ -49,6 +29,28 @@ $talla_participante = mysqli_real_escape_string($conn,(strip_tags($_POST['talla_
 $tipo_sangre_participante = mysqli_real_escape_string($conn,(strip_tags($_POST['tipo_sangre_participante'],ENT_QUOTES)));
 $alergias_participante = mysqli_real_escape_string($conn,(strip_tags($_POST['alergias_participante'],ENT_QUOTES)));
 $enf_participante = mysqli_real_escape_string($conn,(strip_tags($_POST['enf_participante'],ENT_QUOTES)));
+
+
+//FOTOGRAFIA/////////////////////////////////////////////////////////////
+
+//capturamos los datos del fichero subido    
+$type=$_FILES['img_2']['type'];
+$tmp_name = $_FILES['img_2']["tmp_name"];
+$name = $_FILES['img_2']["name"];
+$ext= end($array);
+
+
+//Creamos una nueva ruta (nuevo path)
+//Así guardaremos nuestra imagen en la carpeta "images"
+$nuevo_path="fotos-participantes/".$nombre_participante."-".$id;
+//Movemos el archivo desde su ubicación temporal hacia la nueva ruta
+
+move_uploaded_file($tmp_name,$nuevo_path);
+//Extraer la extensión del archivo. P.e: jpg
+
+$array=explode('.',$nuevo_path);
+
+$ext= end($array);
 
 
 // Acompañante ///////////////////////////////////////////////////////////////
