@@ -119,7 +119,7 @@ WHERE a.clave = '$id'");
                 <div class="container-fluid">
                    <div class="col-md-12">
                             <div class="card">
-                                <form method="POST" action="check-in-function.php?id_participante=<?php echo $id_participante; ?>" class="form-horizontal">
+                                <form method="POST" action="check-in-function.php?id_participante=<?php echo $id_participante; ?>" class="form-horizontal" enctype="multipart/form-data">
                         <div class="card-header card-header-text" data-background-color="red">
                             <h4 class="card-title">Registro de Participante: <?php echo $row['id_participante']. " de " . $row['nombre_pais']?> </h4>
                                     </div>
@@ -155,7 +155,7 @@ WHERE a.clave = '$id'");
                                                     <span class="btn btn-round  btn-file">
                                                         <span class="fileinput-new">Add Photo</span>
                                                         <span class="fileinput-exists">Change</span>
-                                                        <input type="file" name="..." />
+                                                        <input type="file" name="img_2" />
                                                     </span>
                                                     <br />
                                                     <a href="#pablo" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>

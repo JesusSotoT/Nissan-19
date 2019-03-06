@@ -52,7 +52,7 @@ Nissan 2019 - LogSystem
                     Nissan
                 </a>
             </div>
-            <div class="sidebar-wrapper">
+             <div class="sidebar-wrapper">
                 <div class="user">
                     <div class="info">
                         <a data-toggle="collapse" href="#collapseExample" class="collapsed">

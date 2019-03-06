@@ -3,6 +3,30 @@ include 'conexion.php';
 
 if(isset($_POST['registro'])){
 
+
+//FOTOGRAFIA/////////////////////////////////////////////////////////////
+
+//capturamos los datos del fichero subido    
+$type=$_FILES['img_2']['type'];
+$tmp_name = $_FILES['img_2']["tmp_name"];
+$name = $_FILES['img_2']["name"];
+$ext= end($array);
+
+
+//Creamos una nueva ruta (nuevo path)
+//Así guardaremos nuestra imagen en la carpeta "images"
+$nuevo_path="fotos-participantes/".$name;
+//Movemos el archivo desde su ubicación temporal hacia la nueva ruta
+
+move_uploaded_file($tmp_name,$nuevo_path);
+//Extraer la extensión del archivo. P.e: jpg
+
+$array=explode('.',$nuevo_path);
+
+$ext= end($array);
+
+
+
 //PARTICIPANTE/////////////////////////////////////////////////////////////
 
 @$fechaHoy = date("Y-m-d H:i:s",time());
@@ -67,7 +91,7 @@ echo $alergias_participante . "<br>";
 
 echo $enf_participante . "<br>";
 
-$insert = mysqli_query($conn, "UPDATE tagm_participante SET sexo = '$sexo_participante', nombre = '$nombre_participante', apellido_p = '$apellidoP_participante', apellido_m = '$apellidoM_participante', fecha_nacimiento = '$fecha_nacimiento_participante', estatura = 'estatura_participante', talla = '$talla_participante', tipo_sangre = '$tipo_sangre_participante', alergias = '$alergias_participante', enf_medi = '$enf_participante' , habitacion_hotel = '$habitacion_hotel' , hora_registro = '$fechaHoy' , asistencia = '1' WHERE asistencia = '0' AND clave = '$id'") or die(mysqli_error()); 
+$insert = mysqli_query($conn, "UPDATE tagm_participante SET sexo = '$sexo_participante', ruta_foto2 = '$nuevo_path', nombre = '$nombre_participante', apellido_p = '$apellidoP_participante', apellido_m = '$apellidoM_participante', fecha_nacimiento = '$fecha_nacimiento_participante', estatura = 'estatura_participante', talla = '$talla_participante', tipo_sangre = '$tipo_sangre_participante', alergias = '$alergias_participante', enf_medi = '$enf_participante' , habitacion_hotel = '$habitacion_hotel' , hora_registro = '$fechaHoy' , asistencia = '1' WHERE asistencia = '0' AND clave = '$id'") or die(mysqli_error()); 
 
 //acompanante presentacion datos
 echo $sexo_acomp . "<br>";
@@ -105,6 +129,7 @@ $insert2 = mysqli_query($conn, "UPDATE tagm_acompanante SET sexo = '$sexo_acomp'
 						    echo "Valio verga putitos"	;
 						}
 		
+
 				
  ?>
 
