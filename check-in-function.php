@@ -44,7 +44,6 @@ $sexo_participante = mysqli_real_escape_string($conn,(strip_tags($_POST['sexo_pa
 $nombre_participante = mysqli_real_escape_string($conn,(strip_tags($_POST['nombre_participante'],ENT_QUOTES)));
 $apellidoP_participante = mysqli_real_escape_string($conn,(strip_tags($_POST['apellidoP_participante'],ENT_QUOTES)));
 $apellidoM_participante = mysqli_real_escape_string($conn,(strip_tags($_POST['apellidoM_participante'],ENT_QUOTES)));
-$fecha_nacimiento_participante = mysqli_real_escape_string($conn,(strip_tags($_POST['fecha_nacimiento_participante'],ENT_QUOTES)));
 $estatura_participante = mysqli_real_escape_string($conn,(strip_tags($_POST['estatura_participante'],ENT_QUOTES)));
 $talla_participante = mysqli_real_escape_string($conn,(strip_tags($_POST['talla_participante'],ENT_QUOTES)));
 $tipo_sangre_participante = mysqli_real_escape_string($conn,(strip_tags($_POST['tipo_sangre_participante'],ENT_QUOTES)));
@@ -91,7 +90,7 @@ echo $alergias_participante . "<br>";
 
 echo $enf_participante . "<br>";
 
-$insert = mysqli_query($conn, "UPDATE tagm_participante SET sexo = '$sexo_participante', ruta_foto2 = '$nuevo_path', nombre = '$nombre_participante', apellido_p = '$apellidoP_participante', apellido_m = '$apellidoM_participante', fecha_nacimiento = '$fecha_nacimiento_participante', estatura = 'estatura_participante', talla = '$talla_participante', tipo_sangre = '$tipo_sangre_participante', alergias = '$alergias_participante', enf_medi = '$enf_participante' , habitacion_hotel = '$habitacion_hotel' , hora_registro = '$fechaHoy' , asistencia = '1' WHERE asistencia = '0' AND clave = '$id'") or die(mysqli_error()); 
+$insert = mysqli_query($conn, "UPDATE tagm_participante SET sexo = '$sexo_participante', ruta_foto2 = '$nuevo_path', nombre = '$nombre_participante', apellido_p = '$apellidoP_participante', apellido_m = '$apellidoM_participante', estatura = 'estatura_participante', talla = '$talla_participante', tipo_sangre = '$tipo_sangre_participante', alergias = '$alergias_participante', enf_medi = '$enf_participante' , habitacion_hotel = '$habitacion_hotel' , hora_registro = '$fechaHoy' , asistencia = '1' WHERE asistencia = '0' AND clave = '$id'") or die(mysqli_error()); 
 
 //acompanante presentacion datos
 echo $sexo_acomp . "<br>";
