@@ -61,13 +61,7 @@
                         </a>
                     </li>
                     <li class="">
-                        <a href="participante.php">
-                            <i class="material-icons">add</i>
-                            <p>Agregar Participante</p>
-                        </a>
-                    </li>
-                    <li class="">
-                        <a href="Reporte de Registros.php">
+                        <a href="rep_reg.php">
                             <i class="material-icons">book</i>
                             <p>Reporte de Registros</p>
                         </a>
@@ -197,17 +191,18 @@
                                     <table class="table" id="sin_asistencia">
                                         <thead class="title" style="font-size: 12px;">
                                             <th class="text-center">Clave</th>
+                                              <th class="text-center">Pais</th>
                                             <th class="text-center">Nombre</th>
                                             <th class="text-center">Apellido Paterno</th>
+                                          <th class="text-center">Apellido Materno</th>
                                             <th class="text-center">Edad</th>
-                                            <th class="text-center">Habitacion Hotel</th>
-                                            <th class="text-center">Asistencia</th>
+
                                             <th class="text-center">Acompañante</th>
                                         </thead>
                                         <tbody>
                                             <?php
                                 include "conexion.php";
-                  $query =  "SELECT a.clave , a.nombre , a.apellido_p , a.apellido_m, a.fecha_nacimiento , a.habitacion_hotel,a.asistencia, d.nombre as nombre_acompanante , d.apellido_p as acom_ape FROM tagm_participante a left join tagm_acompanante d on d.clave_p = a.clave WHERE asistencia = 0" ;
+                  $query =  "SELECT a.clave , a.nombre , a.apellido_p , a.apellido_m, a.fecha_nacimiento , a.habitacion_hotel,a.asistencia, d.nombre as nombre_acompanante , d.apellido_p as acom_ape , b.pais as pais FROM tagm_participante a left join tagm_acompanante d on d.clave_p = a.clave left join paises b on b.id = a.pais WHERE asistencia = 0" ;
                   $result = $conn->query($query);
                 while ($row = $result->fetch_array())
                   {
@@ -217,10 +212,16 @@
                                                     <?php echo '<a href="registro_participante.php?id='.$row["clave"].'" title="Ver Solicitud" class="btn btn-info">'.$row["clave"].'</a>'; ?>
                                                 </td>
                                                 <td class="text-center">
+                                                    <?php echo $row['pais'] ?>
+                                                </td>
+                                                <td class="text-center">
                                                     <?php echo $row['nombre'] ?>
                                                 </td>
                                                 <td class="text-center">
                                                     <?php echo $row['apellido_p'] ?>
+                                                </td>
+                                                <td class="text-center">
+                                                    <?php echo $row['apellido_m'] ?>
                                                 </td>
                                                 <td class="text-center">
                                                     <?php $fecha1 = $row['fecha_nacimiento'];
@@ -230,12 +231,7 @@ $fecha = str_replace("/","-",$fecha1);
     $edad = $hoy - $fecha; 
     echo $edad; ?>
                                                 </td>
-                                                <td class="text-center">
-                                                    <?php echo $row['habitacion_hotel'] ?>
-                                                </td>
-                                                <td class="text-center">
-                                                    <?php echo $row['asistencia'] ?>
-                                                </td>
+                    
                                                 <td class="text-center">
                                                     <?php echo $row['nombre_acompanante']?>
                                                     <?php echo $row['acom_ape']; ?>
@@ -268,6 +264,7 @@ $fecha = str_replace("/","-",$fecha1);
                                             <th class="text-center">Clave</th>
                                             <th class="text-center">Nombre</th>
                                             <th class="text-center">Apellido Paterno</th>
+                                               <th class="text-center">Apellido Materno</th>
                                             <th class="text-center">Edad</th>
                                             <th class="text-center">Habitacion Hotel</th>
                                             <th class="text-center">Asistencia</th>
@@ -276,7 +273,7 @@ $fecha = str_replace("/","-",$fecha1);
                                         <tbody>
                                             <?php
                                 include "conexion.php";
-                  $query =  "SELECT a.clave , a.nombre , a.apellido_p , a.apellido_m, a.fecha_nacimiento , a.habitacion_hotel,a.asistencia, d.nombre as nombre_acompanante , d.apellido_p as acom_ape FROM tagm_participante a left join tagm_acompanante d on d.clave_p = a.clave WHERE asistencia = 0" ;
+                  $query =  "SELECT a.clave , a.nombre , a.apellido_p , a.apellido_m, a.fecha_nacimiento , a.habitacion_hotel,a.asistencia, d.nombre as nombre_acompanante , d.apellido_p as acom_ape FROM tagm_participante a left join tagm_acompanante d on d.clave_p = a.clave WHERE asistencia = 1" ;
                   $result = $conn->query($query);
                 while ($row = $result->fetch_array())
                   {
@@ -290,6 +287,9 @@ $fecha = str_replace("/","-",$fecha1);
                                                 </td>
                                                 <td class="text-center">
                                                     <?php echo $row['apellido_p'] ?>
+                                                </td>
+                                                <td class="text-center">
+                                                    <?php echo $row['apellido_m'] ?>
                                                 </td>
                                                 <td class="text-center">
                                                     <?php $fecha1 = $row['fecha_nacimiento'];
@@ -376,6 +376,22 @@ $(document).ready(function() {
     demo.initDashboardPageCharts();
 
     demo.initVectorMap();
+
+      $('#sin_asistencia').DataTable({
+            "pagingType": "full_numbers",
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, "All"]
+            ],
+            responsive: true,
+            language: {
+                search: "_INPUT_",
+                searchPlaceholder: "Buscar",
+            }
+
+        });
+
+
 });
 </script>
 <!-- Mirrored from demos.creative-tim.com/material-dashboard-pro/examples/dashboard.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 20 Mar 2017 21:32:16 GMT -->
