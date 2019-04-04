@@ -44,11 +44,11 @@ $sexo_participante = mysqli_real_escape_string($conn,(strip_tags($_POST['sexo_pa
 $nombre_participante = mysqli_real_escape_string($conn,(strip_tags($_POST['nombre_participante'],ENT_QUOTES)));
 $apellidoP_participante = mysqli_real_escape_string($conn,(strip_tags($_POST['apellidoP_participante'],ENT_QUOTES)));
 $apellidoM_participante = mysqli_real_escape_string($conn,(strip_tags($_POST['apellidoM_participante'],ENT_QUOTES)));
-$estatura_participante = mysqli_real_escape_string($conn,(strip_tags($_POST['estatura_participante'],ENT_QUOTES)));
-$talla_participante = mysqli_real_escape_string($conn,(strip_tags($_POST['talla_participante'],ENT_QUOTES)));
-$tipo_sangre_participante = mysqli_real_escape_string($conn,(strip_tags($_POST['tipo_sangre_participante'],ENT_QUOTES)));
+$fecha_nacimiento_participante = mysqli_real_escape_string($conn,(strip_tags($_POST['fecha_nacimiento_participante'],ENT_QUOTES)));
 $alergias_participante = mysqli_real_escape_string($conn,(strip_tags($_POST['alergias_participante'],ENT_QUOTES)));
 $enf_participante = mysqli_real_escape_string($conn,(strip_tags($_POST['enf_participante'],ENT_QUOTES)));
+
+$pais = mysqli_real_escape_string($conn,(strip_tags($_GET['pais'],ENT_QUOTES)));
 
 
 // Acompañante ///////////////////////////////////////////////////////////////
@@ -63,34 +63,12 @@ $tipo_sangre_acomp = mysqli_real_escape_string($conn,(strip_tags($_POST['tipo_sa
 $alergias_acomp = mysqli_real_escape_string($conn,(strip_tags($_POST['alergias_acomp'],ENT_QUOTES)));
 $enf_acomp = mysqli_real_escape_string($conn,(strip_tags($_POST['enf_acomp'],ENT_QUOTES)));
 
-// presentacion participante datos
-echo $fechaHoy . "<br>";
+// presentacion participa
 
-echo $habitacion_hotel . "<br>";
 
-echo $id . "<br>";
+$insert = mysqli_query($conn, "UPDATE tagm_participante SET sexo = '$sexo_participante', ruta_foto2 = '$nuevo_path', nombre = '$nombre_participante', apellido_p = '$apellidoP_participante', apellido_m = '$apellidoM_participante', alergias = '$alergias_participante', enf_medi = '$enf_participante' , habitacion_hotel = '$habitacion_hotel' , hora_registro = '$fechaHoy' , asistencia = '1' WHERE asistencia = '0' AND clave = '$id'") or die(mysqli_error()); 
 
-echo $sexo_participante . "<br>";
 
-echo $nombre_participante . "<br>";
-
-echo $apellidoP_participante . "<br>";
-
-echo $apellidoM_participante . "<br>";
-
-echo $fecha_nacimiento_participante . "<br>";
-
-echo $estatura_participante . "<br>";
-
-echo $talla_participante . "<br>";
-
-echo $tipo_sangre_participante . "<br>";
-
-echo $alergias_participante . "<br>";
-
-echo $enf_participante . "<br>";
-
-$insert = mysqli_query($conn, "UPDATE tagm_participante SET sexo = '$sexo_participante', ruta_foto2 = '$nuevo_path' , nombre = '$nombre_participante', apellido_p = '$apellidoP_participante', apellido_m = '$apellidoM_participante', estatura = 'estatura_participante', talla = '$talla_participante', tipo_sangre = '$tipo_sangre_participante', alergias = '$alergias_participante', enf_medi = '$enf_participante' , habitacion_hotel = '$habitacion_hotel' , hora_registro = '$fechaHoy' , asistencia = '1' WHERE asistencia = '0' AND clave = '$id'") or die(mysqli_error()); 
 
 //acompanante presentacion datos
 echo $sexo_acomp . "<br>";
@@ -120,12 +98,63 @@ $insert2 = mysqli_query($conn, "UPDATE tagm_acompanante SET sexo = '$sexo_acomp'
 
 
 						if($insert == true && $insert2 == true){
-						    header('Location: home2admin.php?complete=1');
-							echo "exito putitos"	;
+						/*	switch ($pais) {
+								case '0':
+									header('Location: dash-contries/dash-arg.php?complete=1');
+									break;
+									case '1':
+									header('Location: dash-contries/dash-chl.php?complete=1');
+									break;
+									case '2':
+									header('Location: dash-contries/dash-per.php?complete=1');
+									break;
+									case '3':
+									header('Location: dash-contries/dash-col.php?complete=1');
+									break;
+									case '4':
+									header('Location: dash-contries/dash-.php?complete=1');
+									break;
+									case '5':
+									header('Location: dash-contries/dash-.php?complete=1');
+									break;
+									case '6':
+									header('Location: dash-contries/dash-.php?complete=1');
+									break;
+									case '7':
+									header('Location: dash-contries/dash-.php?complete=1');
+									break;
+									case '8':
+									header('Location: dash-contries/dash-.php?complete=1');
+									break;
+									case '9':
+									header('Location: dash-contries/dash-.php?complete=1');
+									break;
+									case '10':
+									header('Location: dash-contries/dash-.php?complete=1');
+									break;
+									case '11':
+									header('Location: dash-contries/dash-.php?complete=1');
+									break;
+									case '12':
+									header('Location: dash-contries/dash-.php?complete=1');
+									break;
+									case '13':
+									header('Location: dash-contries/dash-.php?complete=1');
+									break;
+									case '14':
+									header('Location: dash-contries/dash-.php?complete=1');
+									break;
+								
+								default:
+									 header('Location: home2admin.php?complete=1');
+									break;
+							}*/
+							echo "exito"	;
+							 header('Location: home2admin.php?complete=1');
 						}else{
-						    // header('Location: error-checkin.php');
+						    header('Location: error-checkin.php');
 
-						    echo "Valio verga putitos"	;
+						    echo "Valio"	;
 						}
 		
 

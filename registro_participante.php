@@ -68,47 +68,14 @@ Nissan 2019 - LogSystem
                         </div>
                     </div>
                 </div>
-                <ul class="nav">
-                    <li class="active">
-                        <a href="home2admin.php">
-                            <i class="material-icons">dashboard</i>
-                            <p>Inicio</p>
-                        </a>
-                    </li>
-                    <li class="">
-                        <a href="participante.php">
-                            <i class="material-icons">add</i>
-                            <p>Agregar Participante</p>
-                        </a>
-                    </li>
-                    <li class="">
-                        <a href="Reporte de Registros.php">
-                            <i class="material-icons">book</i>
-                            <p>Reporte de Registros</p>
-                        </a>
-                    </li>
-                     <li class="">
-                        <a href="timeline_regist.php">
-                            <i class="material-icons">alarm</i>
-                            <p>Horarios de Llegada</p>
-                        </a>
-                    </li>
-                    <li class="">
-                        <a href="paises_llegada.php">
-                            <i class="material-icons">alarm</i>
-                            <p>Registrar Llegada de Paises</p>
-                        </a>
-                    </li>
-                </ul>
+               
             </div>
         </div>
         <div class="main-panel">
              <?php    include "conexion.php";
 $id = intval($_GET['id']);
-$sql = mysqli_query($conn, "SELECT a.clave AS 'id_participante', a.nombre AS 'nombre_participante', a.apellido_p as 'apellidoP_participante' , a.apellido_m AS 'apellidoM_participante' , a.pais AS 'id_pais' , c.pais as 'nombre_pais' , a.ruta_foto1, a.ruta_foto2 , a.sexo as 'sexo_participante' , a.fecha_nacimiento as 'fecha_nacimiento_participante' , a.estatura , a.alergias as 'alergias_participante' , a.enf_medi AS 'enf_participante' , a.asistencia , a.habitacion_hotel , a.hora_registro , a.talla as 'id_talla_participante' , d.talla as 'talla_participante' , a.tipo_sangre as 'id_tipo_sangreParticipante' , e.tipo_sangre as 'tipo_sangre_participante' , c.ruta_imagen    FROM tagm_participante a 
+$sql = mysqli_query($conn, "SELECT a.clave AS 'id_participante', a.nombre AS 'nombre_participante', a.apellido_p as 'apellidoP_participante' , a.apellido_m AS 'apellidoM_participante' , a.pais AS 'id_pais' , c.pais as 'nombre_pais' , a.ruta_foto1, a.ruta_foto2 , a.sexo as 'sexo_participante' , a.fecha_nacimiento as 'fecha_nacimiento_participante' , a.alergias as 'alergias_participante' , a.enf_medi AS 'enf_participante' , a.asistencia , a.habitacion_hotel , a.hora_registro  , c.ruta_imagen    FROM tagm_participante a 
 LEFT JOIN paises c on a.pais = c.id
-LEFT JOIN tagm_tallas d on a.talla = d.id
-LEFT JOIN tagm_tipos_sangre e on a.tipo_sangre = e.id
 WHERE a.clave = '$id'");
        if(mysqli_num_rows($sql) == 0){
                 header("Location: home2admin.php");
@@ -119,7 +86,7 @@ WHERE a.clave = '$id'");
                 <div class="container-fluid">
                    <div class="col-md-12">
                             <div class="card">
-                                <form method="POST" action="check-in-function.php?id_participante=<?php echo $id_participante; ?>" class="form-horizontal" enctype="multipart/form-data">
+                                <form method="POST" action="check-in-function.php?id_participante=<?php echo $id_participante; ?>&pais=<?php echo $row['id_pais']; ?>" class="form-horizontal" enctype="multipart/form-data">
                         <div class="card-header card-header-text" data-background-color="red">
                             <h4 class="card-title">Registro de Participante: <?php echo $row['id_participante']. " de " . $row['nombre_pais']?> </h4>
                                     </div>
@@ -164,7 +131,7 @@ WHERE a.clave = '$id'");
                                         </div>
                                                     </div>
                                                      <div class="col-sm-1"></div>
-                                                       <div class="col-md-3">
+                                                       <div class="col-md-4">
                                                         <label class="control-label">Sexo:</label>
                                                         <div class="form-group label-floating is-empty">
                                                     <select class="selectpicker" data-style="select-with-transition" name="sexo_participante" multiple  data-size="7"><?php $sexo = $row['sexo_participante'];
@@ -226,29 +193,7 @@ WHERE a.clave = '$id'");
                                                         </div>
                                                     </div>
                                               
-                                                 <div class="col-sm-2">
-                                                         <label class="control-label">Estatura (cm):</label>
-                                                        <div class="form-group label-floating is-empty">
-                                                            <label class="control-label"></label>
-                                                            <input type="number" name="estatura_participante" class="form-control" value="<?php echo $row['estatura'] ?>">
-                                                        </div>
-                                                    </div>
-                                                      <div class="col-md-1">
-                                                         <label class="control-label" style="margin-top: 10px;">Talla:</label>
-                                                        
-                                                           <select class="selectpicker" data-style="select-with-transition" name="talla_participante" multiple  data-size="7">
-                                    <option value="<?php echo$row['id_talla_participante'] ?>" selected><?php echo $row['talla_participante'] ?></option>
-                                                    </select>
-                                                    
-                                                    </div>
-                                                     <div class="col-md-2">
-                                                         <label class="control-label" style="margin-top: 10px;">Tipo de Sangre:</label>
-                                                        
-                                                           <select class="selectpicker" data-style="select-with-transition" name="tipo_sangre_participante" multiple  data-size="7">
-                                    <option value="<?php echo$row['id_tipo_sangreParticipante'] ?>" selected><?php echo $row['tipo_sangre_participante'] ?></option>
-                                                    </select>
-                                                    
-                                                    </div>
+                                        
                                             </div>
                                             <div class="row">
                                             <div class="col-sm-12"> 
