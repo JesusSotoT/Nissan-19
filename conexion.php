@@ -1,8 +1,8 @@
 <?php
-$host="sql175.main-hosting.eu";
-$user="u879652823_jstd";
-$password="Nissan2019-agmedia";
-$db="u879652823_nis19";
+$host="localhost";
+$user="root";
+$password="root";
+$db="nissan19";
 
 
 $conn = mysqli_connect($host,$user,$password,$db);
